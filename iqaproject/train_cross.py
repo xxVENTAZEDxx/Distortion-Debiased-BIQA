@@ -194,7 +194,7 @@ def train(train_loader, model, res_model, optimizer,lr_scheduler, criterion, epo
         preds = model(img, img_res)
         # print(preds.shape)
 
-        loss = criterion(preds, labels)  # 计算修复后的图像和原始图像之间的损失
+        loss = criterion(preds, labels)  
         # loss2 = error_loss
 
         # loss = loss1 + loss2

@@ -181,16 +181,15 @@ class CSIQFolder(data.Dataset):
         self.transforms = transforms
 
     def __getitem__(self, index):
-        path, target, ref_path = self.samples[index]  # 获取参考图像的路径
-        img = imgread(path)  # 直接读取图像，不进行颜色空间转换
-        img = imgprocess(img, patch_size=[384, 384])  # 对图像进行必要的预处理
-        sample = self.transforms(img)  # 对图像应用转换
+        path, target, ref_path = self.samples[index]  
+        img = imgread(path)  
+        img = imgprocess(img, patch_size=[384, 384])  
+        sample = self.transforms(img)  
 
-        ref_img = imgread(ref_path)  # 读取参考图像
-        ref_img = imgprocess(ref_img, patch_size=[384, 384])  # 对参考图像进行必要的预处理
-        ref_sample = self.transforms(ref_img)  # 对参考图像应用转换
-
-        return sample, ref_sample, target  # 返回样本、目标和参考样本
+        ref_img = imgread(ref_path)  
+        ref_img = imgprocess(ref_img, patch_size=[384, 384])  
+        ref_sample = self.transforms(ref_img)  
+        return sample, ref_sample, target  
 
     def __len__(self):
         length = len(self.samples)
@@ -228,16 +227,16 @@ class TID2013Folder(data.Dataset):
         self.transforms = transforms
 
     def __getitem__(self, index):
-        path, target, ref_path = self.samples[index]  # 获取参考图像的路径
-        img = imgread(path)  # 直接读取图像，不进行颜色空间转换
-        img = imgprocess(img, patch_size=[384, 384])  # 对图像进行必要的预处理
-        sample = self.transforms(img)  # 对图像应用转换
+        path, target, ref_path = self.samples[index]  
+        img = imgread(path)  
+        img = imgprocess(img, patch_size=[384, 384])  
+        sample = self.transforms(img) 
 
-        ref_img = imgread(ref_path)  # 读取参考图像
-        ref_img = imgprocess(ref_img, patch_size=[384, 384])  # 对参考图像进行必要的预处理
-        ref_sample = self.transforms(ref_img)  # 对参考图像应用转换
+        ref_img = imgread(ref_path)  
+        ref_img = imgprocess(ref_img, patch_size=[384, 384]) 
+        ref_sample = self.transforms(ref_img)  
 
-        return sample, ref_sample, target  # 返回样本、目标和参考样本
+        return sample, ref_sample, target  
 
     def __len__(self):
         length = len(self.samples)
@@ -309,9 +308,9 @@ class LIVEChallengeFolder(data.Dataset):
 
     def __getitem__(self, index):
         path, target = self.samples[index]
-        img = imgread(path)  # 直接读取图像，不进行颜色空间转换
-        img = imgprocess(img, patch_size=[384, 384])  # 对图像进行必要的预处理
-        sample = self.transforms(img)  # 对图像应用转换
+        img = imgread(path)  
+        img = imgprocess(img, patch_size=[384, 384])  
+        sample = self.transforms(img)  
         return sample, target
 
     def __len__(self):
@@ -340,9 +339,9 @@ class Koniq_10kFolder(data.Dataset):
 
     def __getitem__(self, index):
         path, target = self.samples[index]
-        img = imgread(path)  # 直接读取图像，不进行颜色空间转换
-        img = imgprocess(img, patch_size=[384, 384])  # 对图像进行必要的预处理
-        sample = self.transforms(img)  # 对图像应用转换
+        img = imgread(path)  
+        img = imgprocess(img, patch_size=[384, 384]) 
+        sample = self.transforms(img)  
         return sample, target
 
     def __len__(self):
@@ -366,9 +365,9 @@ class SPAQ(data.Dataset):
 
     def __getitem__(self, index):
         path, target = self.samples[index]
-        img = imgread(path)  # 直接读取图像，不进行颜色空间转换
+        img = imgread(path) 
         img = self.resize_image(img)
-        img = imgprocess(img, patch_size=[384, 384])  # 对图像进行必要的预处理
+        img = imgprocess(img, patch_size=[384, 384])  
         sample = self.transforms(img)
 
         # path, target = self.samples[index]

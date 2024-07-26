@@ -66,7 +66,7 @@ def save_checkpoint(plcc, srocc, model, optimizer, args, epoch):
         'optimizer_state_dict': optimizer.state_dict(),
         'srocc': srocc,
         'plcc': plcc,
-    }, os.path.join('checkpoints', 'checkpoint_model_best.pth'))  # 模型保存路径为'checkpoints/checkpoint_model_best.pth'
+    }, os.path.join('checkpoints', 'checkpoint_model_best.pth'))  
 
 
 best_srocc = 0.
@@ -147,7 +147,7 @@ def _eval(epoch, test_loader, model, res_model, args, crop_size = 224):
             output = output.cpu().tolist()
             label = label.cpu().tolist()
 
-            # 计算PSNR和SSIM
+     
             plcc,_ = stats.pearsonr(output, label)
             srocc,_ = stats.spearmanr(output, label)
             print(plcc)
@@ -223,24 +223,24 @@ dataset_path ={
 }
 
 def load_config():
-    parser = argparse.ArgumentParser()  # 创建一个解析器对象
-    parser.add_argument('--pretrain_path', type=str, default=dataset_path['pretrain_path'])  # 添加预训练数据集路径参数，默认为字典中的值
-    parser.add_argument('--test_path', type=str, default=dataset_path['test_path'])  # 添加测试数据集路径参数，默认为字典中的值
+    parser = argparse.ArgumentParser() 
+    parser.add_argument('--pretrain_path', type=str, default=dataset_path['pretrain_path'])  
+    parser.add_argument('--test_path', type=str, default=dataset_path['test_path'])  
     parser.add_argument('--ref_path', type=str, default=dataset_path['ref_path'])
     parser.add_argument('--label_path', type=str, default=dataset_path['label_path'])
-    parser.add_argument('--batch_size', type=int, default=72)  # 添加批量大小参数，默认为64
-    parser.add_argument('--resize_ratio', type=float, default=0.75)  # 添加图像缩放比例参数，默认为0.75
-    parser.add_argument('--num_workers', type=int, default=8)  # 添加工作线程数参数，默认为8
-    parser.add_argument('--lr', type=float, default=1e-4)  # 添加学习率参数，默认为0.05
-    parser.add_argument('--weight_decay', type=float, default=1e-4)  # 添加权重衰减参数，默认为1e-4
-    parser.add_argument('--momentum', type=float, default=0.9)  # 添加动量参数，默认为0.9
-    parser.add_argument('--cuda', type=bool, default=True)  # 添加是否使用CUDA参数，默认为True
-    parser.add_argument('--epochs', type=int, default=5)  # 添加训练轮数参数，默认为50
-    parser.add_argument('--print_intervals', type=int, default=5000)  # 添加打印间隔参数，默认为1000
-    parser.add_argument('--evaluation', type=bool, default=False)  # 添加是否评估模式参数，默认为False
-    parser.add_argument('--checkpoints', type=str, default=None, help='model checkpoints path')  # 添加模型检查点路径参数，默认为None，带有帮助信息
-    parser.add_argument('--device_num', type=int, default=1)  # 添加设备数参数，默认为1
-    parser.add_argument('--gradient_clip', type=float, default=2.)  # 添加梯度裁剪参数，默认为2.
+    parser.add_argument('--batch_size', type=int, default=72)  
+    parser.add_argument('--resize_ratio', type=float, default=0.75)  
+    parser.add_argument('--num_workers', type=int, default=8)  
+    parser.add_argument('--lr', type=float, default=1e-4)  
+    parser.add_argument('--weight_decay', type=float, default=1e-4)  
+    parser.add_argument('--momentum', type=float, default=0.9)  
+    parser.add_argument('--cuda', type=bool, default=True)  
+    parser.add_argument('--epochs', type=int, default=5)  
+    parser.add_argument('--print_intervals', type=int, default=5000)  
+    parser.add_argument('--evaluation', type=bool, default=False) 
+    parser.add_argument('--checkpoints', type=str, default=None, help='model checkpoints path')  
+    parser.add_argument('--device_num', type=int, default=1)  
+    parser.add_argument('--gradient_clip', type=float, default=2.)  
     parser.add_argument('--beta1', type=float, default=0.9, help='beta1 for Adam optimizer')
     parser.add_argument('--beta2', type=float, default=0.99, help='beta2 for Adam optimizer')
 

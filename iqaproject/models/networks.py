@@ -111,7 +111,7 @@ class IQAModel(nn.Module):
     def forward_features(self, x, block_list):
         features = []
 
-        # 遍历ModuleList，提取特征并添加到列表中
+
         for i, block in enumerate(block_list):
 
             x = block(x)

@@ -60,15 +60,14 @@ def main(config):
 
     # Create an instance of VIPNet model
     model = IQAModel()
-    # 加载预训练模型
     pretrained_model_path = 'class_model_best.pth'
     pretrained_dict = torch.load(pretrained_model_path)
     model_dict = model.state_dict()
 
-    # 过滤出只包含 'class_branch' 和 'fc' 的预训练参数
+
     pretrained_dict = {k: v for k, v in pretrained_dict.items() if 'class_branch' in k or 'fc' in k}
 
-    # 更新现有的 model_dict
+
     model_dict.update(pretrained_dict)
 
     model.load_state_dict(model_dict, strict=True)
@@ -177,8 +176,7 @@ def train(train_loader, model, res_model, optimizer,lr_scheduler, criterion, epo
         # print(img.shape)
         img, labels = img.to(device), labels.to(device)
         img_res = res_model(img)[0].to(device)
-        # print(type(img))  # 打印x的类型
-        # print(type(img_res))  # 打印x的类型
+        
 
         image_height, image_width = img.shape[-2], img.shape[-1]
 

@@ -66,14 +66,14 @@ class DataLoader(object):
 class PreTrainingDataset(data.Dataset):
 
     def __init__(self, root, index, transform, label_path):
-        # 读取CSV文件
+        
         df = pd.read_csv(label_path)
 
-        # 生成文件路径和标签的列表
+      
         all_img_path = [os.path.join(root, filename) for filename in df.iloc[:, 0]]
         all_label = list(df.iloc[:, 1])
 
-        # 使用索引列表生成样本列表
+        
         self.samples = [(all_img_path[i], all_label[i]) for i in index]
 
         self.transform = transform
@@ -105,14 +105,14 @@ def RGB_Loader(path):
 
 
 if __name__ == '__main__':
-    # 创建一个 PreTrainingDataset 对象
+   
     transforms = torchvision.transforms.Compose([
         torchvision.transforms.CenterCrop((384, 384)),
         torchvision.transforms.ToTensor(),
     ])
     dataset = PreTrainingDataset(root='/home/user/zed/pretrain-class', label_path='/home/user/zed/pretrain-class/labels.csv', index=range(10), transform=transforms)
 
-    # 打印前10个样本的图像路径和标签
+    
     for i in range(10):
         img, label = dataset[i]
         print(f'Sample #{i+1}:')
